@@ -1,8 +1,10 @@
 from flask import Flask
 from flask_restx import Api, Resource, fields
 from werkzeug.middleware.proxy_fix import ProxyFix
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 app.wsgi_app = ProxyFix(app.wsgi_app)
 api = Api(app, version="1.0", title="TodoMVC API", description="A simple TodoMVC API",)
 
